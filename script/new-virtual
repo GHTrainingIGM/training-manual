@@ -34,6 +34,7 @@ function GetDetails() {
   # Check the shell for errors
   if [ $ERROR_CODE -eq 0 ]; then
     git clone "https://$TOKEN_OWNER:$TEACHER_PAT@$ROOT_URL/$CLASS_ORG/$REPO_NAME" "$REPO_NAME" >>log.out 2>&1
+    
     pushd "$REPO_NAME" || return
     {
       git config user.name "$TOKEN_OWNER"
@@ -43,15 +44,16 @@ function GetDetails() {
     } >>log.out 2>&1
     if [ "$OSTYPE" = "msys" ]; then
       {
+        echo "$TEACHER on $CLASS_DATE"
         sed -i "s/THIS-DATE/$CLASS_DATE/g" README.md
         sed -i "s/TEACHER-HANDLE/$TEACHER/g" README.md
         sed -i "s|caption-this|$REPO_NAME|g" _config.yml
       } >>log.out 2>&1
     else
       {
-        sed -i "" "s/THIS-DATE/$CLASS_DATE/g" README.md
-        sed -i "" "s/TEACHER-HANDLE/$TEACHER/g" README.md
-        sed -i "" "s|caption-this|$REPO_NAME|g" _config.yml
+        sed -i "s/THIS-DATE/$CLASS_DATE/g" README.md
+        sed -i "s/TEACHER-HANDLE/$TEACHER/g" README.md
+        sed -i "s|caption-this|$REPO_NAME|g" _config.yml
       } >>log.out 2>&1
     fi
     {

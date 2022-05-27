@@ -26,6 +26,7 @@ add_collaborators() {
     if [[ ${collaborators[*]:?} == *"${commenter}"* ]]; then
       existing_collaborators+=("$commenter")
     else # Add collaborator
+      echo "Adding $commenter"
       curl -s -S -i -u "$TOKEN_OWNER:$TEACHER_PAT" \
         -X PUT "$repo_endpoint/collaborators/$commenter" >>log.out 2>&1
       get_collaborators "$collab_repo" # Update list of collaborators
@@ -172,10 +173,12 @@ create_one_on_one_issue() {
 
 get_commenters() {
   # Array of commenters
+  echo "Getting commenters..."
   IFS=" " read -ra commenters <<<"$(
     curl -s -S -u "$TOKEN_OWNER:$TEACHER_PAT" -X GET "$repo_endpoint/issues/1/comments?per_page=100" |
       jq -r 'map(.user.login) | unique | @sh' | tr -d \'
   )" >>log.out 2>&1
+  echo "Commenters are : $commenters"
 }
 
 get_existing_files() {

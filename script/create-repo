@@ -86,7 +86,7 @@ function CloneRepo() {
   popd || return
 
   # Remove it
-  rm -rf "${REPO_NAME}"
+  #rm -rf "${REPO_NAME}"
 }
 
 # Check the avilablity

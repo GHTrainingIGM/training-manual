@@ -159,6 +159,9 @@ create_repo() {
       has_wiki:=false \
       has_downloads:=true >>log.out 2>&1
 
+    # Sleep 5 seconds to see if the "failed to push commits error will be resolved"
+    sleep 5
+
     git_push
 
     # Create issues for problems
