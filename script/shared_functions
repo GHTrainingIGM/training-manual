@@ -70,7 +70,7 @@ create_repo() {
     name="$name" \
     description="$description" \
     homepage="$homepage" \
-    private:="$private" \
+    private="$private" \
     has_wiki="$has_wiki"; then
     echo "Done."
   else
@@ -270,7 +270,7 @@ create_issue() {
   echo -n "Creating issue: $title... "
 
   # Wait for 1 second to avoid secondary rate limiting
-  sleep 1
+  sleep 3
 
   if http --check-status --ignore-stdin --quiet --auth \
     "$TOKEN_OWNER:$TEACHER_PAT" "$org_repos_endpoint/$repo/issues" \
@@ -295,7 +295,7 @@ create_pull_request() {
   echo -n "Creating pull request: $title... "
 
   # Wait for 1 second to avoid secondary rate limiting
-  sleep 1
+  sleep 3
 
   if http --check-status --ignore-stdin --quiet --auth \
     "$TOKEN_OWNER:$TEACHER_PAT" "$org_repos_endpoint/$repo/pulls" \
