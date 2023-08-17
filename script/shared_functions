@@ -70,7 +70,7 @@ create_repo() {
     name="$name" \
     description="$description" \
     homepage="$homepage" \
-    private="$private" \
+    private:="$private" \
     has_wiki="$has_wiki"; then
     echo "Done."
   else
